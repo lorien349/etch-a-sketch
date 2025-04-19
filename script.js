@@ -1,20 +1,31 @@
 // Program's variables
+let isRainbow = false;
 let squaresPerSide = 16;
 
 // Colors
 const BLACK_COLOR = "#000000";
 const WHITE_COLOR = "#ffffff";
+const DARK_GRAY_COLOR = "#929292";
+const LIGHT_GRAY_COLOR = "#c5c5c5";
 
 // DOM nodes
-const container = document.querySelector("#container");
+const container = document.querySelector("#squares-container");
 const changeButton = document.querySelector("#change-button");
+const rainbowButton = document.querySelector("#rainbow-button");
 
 
 
 // Functions
 function changeSquareColor(square) {
-    const RAMDOM_COLOR = `rgb(${((Math.random()) * 100 + 70).toFixed(0)}, ${((Math.random()) * 100 + 70).toFixed(0)}, ${((Math.random()) * 100 + 70).toFixed(0)})`
-    square.style.backgroundColor = RAMDOM_COLOR;
+    switch(isRainbow) {
+        case true:
+            const RAMDOM_COLOR = `rgb(${((Math.random()) * 100 + 70).toFixed(0)}, ${((Math.random()) * 100 + 70).toFixed(0)}, ${((Math.random()) * 100 + 70).toFixed(0)})`;
+            square.style.backgroundColor = RAMDOM_COLOR;
+            break;
+        case false:
+            square.style.backgroundColor = BLACK_COLOR;
+
+    }
 };
 
 function createPanel() {
@@ -37,7 +48,7 @@ function createPanel() {
 
 
 // Event listeners
-container.addEventListener("mousemove", (event) => changeSquareColor(event.target));
+container.addEventListener("mouseover", (event) => changeSquareColor(event.target));
 
 changeButton.addEventListener("click", function() {
     while (true) {
@@ -49,8 +60,20 @@ changeButton.addEventListener("click", function() {
     }
 });
 
+rainbowButton.addEventListener("click", function() {
+    switch(isRainbow) {
+        case true:
+            isRainbow = false;
+            rainbowButton.style.backgroundColor = LIGHT_GRAY_COLOR;
+            break;
+        case false:
+            isRainbow = true;
+            rainbowButton.style.backgroundColor = DARK_GRAY_COLOR;
+            break;
+    }
+});
+
 
 
 // Program
 createPanel()
-console.log(((Math.random()) * 100 + 150).toFixed(0))
