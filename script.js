@@ -13,7 +13,8 @@ const changeButton = document.querySelector("#change-button");
 
 // Functions
 function changeSquareColor(square) {
-    square.style.backgroundColor = BLACK_COLOR;
+    const RAMDOM_COLOR = `rgb(${((Math.random()) * 100 + 70).toFixed(0)}, ${((Math.random()) * 100 + 70).toFixed(0)}, ${((Math.random()) * 100 + 70).toFixed(0)})`
+    square.style.backgroundColor = RAMDOM_COLOR;
 };
 
 function createPanel() {
@@ -26,7 +27,7 @@ function createPanel() {
         const square = document.createElement("div");
         square.setAttribute("class", "square");
         square.style.width = `${(500 / squaresPerSide) - 2}px`;
-        square.style.height = `${(500 / squaresPerSide) - 2}px`
+        square.style.height = `${(500 / squaresPerSide) - 2}px`;
         square.style.border = "1px solid black";
         square.style.backgroundColor = WHITE_COLOR;
         container.appendChild(square);
@@ -52,3 +53,4 @@ changeButton.addEventListener("click", function() {
 
 // Program
 createPanel()
+console.log(((Math.random()) * 100 + 150).toFixed(0))
