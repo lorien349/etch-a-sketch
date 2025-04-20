@@ -1,5 +1,6 @@
 // Program's variables
 let isRainbow = false;
+let isEraser = false;
 let squaresPerSide = 16;
 
 // Colors
@@ -12,19 +13,28 @@ const LIGHT_GRAY_COLOR = "#c5c5c5";
 const container = document.querySelector("#squares-container");
 const changeButton = document.querySelector("#change-button");
 const rainbowButton = document.querySelector("#rainbow-button");
+const eraserButton = document.querySelector("#eraser-button");
 
 
 
 // Functions
 function changeSquareColor(square) {
-    switch(isRainbow) {
-        case true:
-            const RAMDOM_COLOR = `rgb(${((Math.random()) * 100 + 70).toFixed(0)}, ${((Math.random()) * 100 + 70).toFixed(0)}, ${((Math.random()) * 100 + 70).toFixed(0)})`;
-            square.style.backgroundColor = RAMDOM_COLOR;
-            break;
+    switch(isEraser) {
         case false:
-            square.style.backgroundColor = BLACK_COLOR;
+            switch(isRainbow) {
+                case true:
+                    const RAMDOM_COLOR = `rgb(${((Math.random()) * 100 + 70).toFixed(0)}, ${((Math.random()) * 100 + 70).toFixed(0)}, ${((Math.random()) * 100 + 70).toFixed(0)})`;
+                    square.style.backgroundColor = RAMDOM_COLOR;
+                    break;
+                case false:
+                    square.style.backgroundColor = BLACK_COLOR;
+                    break;
+            }
+            break;
 
+        case true:
+            square.style.backgroundColor = WHITE_COLOR;
+            break;
     }
 };
 
@@ -69,6 +79,27 @@ rainbowButton.addEventListener("click", function() {
         case false:
             isRainbow = true;
             rainbowButton.style.backgroundColor = DARK_GRAY_COLOR;
+            if (isEraser == true) {
+                eraserButton.style.backgroundColor = LIGHT_GRAY_COLOR;
+                isEraser = false;
+            }
+            break;
+    }
+});
+
+eraserButton.addEventListener("click", function() {
+    switch(isEraser) {
+        case true:
+            isEraser = false;
+            eraserButton.style.backgroundColor = LIGHT_GRAY_COLOR;
+            break;
+        case false:
+            isEraser = true;
+            eraserButton.style.backgroundColor = DARK_GRAY_COLOR;
+            if (isRainbow == true) {
+                rainbowButton.style.backgroundColor = LIGHT_GRAY_COLOR;
+                isRainbow = false;
+            }
             break;
     }
 });
